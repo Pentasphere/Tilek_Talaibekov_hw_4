@@ -1,16 +1,17 @@
 import java.util.Random;
 
 public class Main {
-    public static int bossHealth = 700;
+    public static int bossHealth = 2000;
     public static int bossDamage = 50;
     public static String bossDefence;
-    public static int[] heroesHealth = {280, 270, 250, 280, 200, 200, 200, 400};
+    public static int[] heroesHealth = {280, 270, 250, 280, 200, 200, 600, 400};
     public static int[] heroesDamage = {10, 15, 20, 0, 20, 20, 20, 5};
-    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic", "Medic", "Lucky", "Thor", "Berserk", "Golem"};
+    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic", "Medic", "Lucky", "Thor", "Witcher", "Golem"};
     public static int roundNumber = 0;
 
 
     public static void main(String[] args) {
+        
         printStatistics();
         while (!isGameFinished()) {
             playRound();
@@ -32,7 +33,7 @@ public class Main {
         medicHealth();
         uklonLucky();
         oglohThor();
-        hitBerserk();
+        treatWitcher();
         hitGolem();
     }
 
@@ -52,13 +53,25 @@ public class Main {
         }
     }
 
-    private static void hitBerserk(){
+    private static void treatWitcher() {
+        for (int i = 0; i < heroesHealth.length; i++) {
+            if (heroesAttackType[i].equals("Witcher")) {
+                continue;
+            } else if (heroesHealth[i] == 0 && heroesHealth[6] > 0) {
+                heroesHealth[i] = heroesHealth[i] + heroesHealth[6];
+                heroesHealth[6] = 0;
+                System.out.println("Witcher отдал жизнь " + heroesAttackType[i]);
+                break;
+            }
+        }
+    }
+    /*private static void hitBerserk(){
         if (heroesHealth[6]>0){
             heroesHealth[6] +=10;
             heroesDamage[6] +=10;
         }
         System.out.println("режим берсерк");
-    }
+    }*/
 
     private static void oglohThor(){
         if (bossDamage >= 0){
