@@ -54,6 +54,7 @@ public class Main {
     }
 
     private static void treatWitcher() {// Added Witcher
+
         for (int i = 0; i < heroesHealth.length; i++) {
             if (heroesAttackType[i].equals("Witcher")) {
                 continue;
